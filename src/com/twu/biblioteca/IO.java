@@ -13,26 +13,26 @@ import java.io.IOException;
 public class IO {
 
     public JSONObject fileReader(String fileName) {
-            JSONParser parser = new JSONParser();
-            JSONObject jsonObject = null;
-            try {
-                Object obj = parser.parse(new FileReader(fileName));
-                jsonObject = (JSONObject) obj;
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-            return jsonObject;
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = null;
+        try {
+            Object obj = parser.parse(new FileReader(fileName));
+            jsonObject = (JSONObject) obj;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return jsonObject;
+    }
 
 
     public void updateJasonFile(JSONObject updatedobj, String fileName) {
-            try {
-                FileWriter file = new FileWriter(fileName);
-                file.write(updatedobj.toJSONString());
-                file.flush();
-                file.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            FileWriter file = new FileWriter(fileName);
+            file.write(updatedobj.toJSONString());
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
