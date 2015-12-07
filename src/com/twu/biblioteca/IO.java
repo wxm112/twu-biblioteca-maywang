@@ -4,6 +4,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Created by mayw on 7/12/2015.
@@ -21,5 +23,16 @@ public class IO {
             }
             return jsonObject;
         }
-    
+
+
+    public void updateJasonFile(JSONObject updatedobj, String fileName) {
+            try {
+                FileWriter file = new FileWriter(fileName);
+                file.write(updatedobj.toJSONString());
+                file.flush();
+                file.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
 }
