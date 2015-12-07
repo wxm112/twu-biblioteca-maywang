@@ -17,11 +17,21 @@ public class IoTest {
     public void initialize(){
         file = new IO();
         JSONObject obj = new JSONObject();
-        JSONObject bookDetails = new JSONObject();
-        bookDetails.put("Checkout","No");
-        bookDetails.put("Author","Johanna Basford");
-        bookDetails.put("PublicationYear", "2015");
-        obj.put("SECRET GARDEN", bookDetails);
+        JSONObject bookDetail1 = new JSONObject();
+        bookDetail1.put("Checkout","No");
+        bookDetail1.put("Author","Johanna Basford");
+        bookDetail1.put("PublicationYear", "2015");
+        obj.put("SECRET GARDEN", bookDetail1);
+        JSONObject bookDetail2 = new JSONObject();
+        bookDetail2.put("Checkout","No");
+        bookDetail2.put("Author","Warner Brothers");
+        bookDetail2.put("PublicationYear", "2015");
+        obj.put("HARRY POTTER COLOURING BOOK", bookDetail2);
+        JSONObject bookDetail3 = new JSONObject();
+        bookDetail3.put("Checkout","Yes");
+        bookDetail3.put("Author","Drew Daywal");
+        bookDetail3.put("PublicationYear", "2015");
+        obj.put("THE DAY THE CRAYONS QUIT", bookDetail3);
         file.updateJasonFile(obj,"./testData.json");
     }
 

@@ -11,6 +11,7 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class ListTest {
     private IO file = new IO();
+//    JSONObject data = file.fileReader("./testData.json");
 
     @Test
     public void getAvailabeBooksTest() throws Exception {
@@ -18,7 +19,11 @@ public class ListTest {
         availableBooks.add("Book Title: SECRET GARDEN");
         availableBooks.add("Author: Johanna Basford");
         availableBooks.add("Publication Year: 2015"+ "\n");
+        availableBooks.add("Book Title: HARRY POTTER COLOURING BOOK");
+        availableBooks.add("Author: Warner Brothers");
+        availableBooks.add("Publication Year: 2015"+ "\n");
 
-        assertEquals(availableBooks, new List().getAvailabeBooks("./testData.json"));
+        assertEquals(availableBooks, new List().getAvailabeBooks(file.fileReader("./testData.json")));
     }
+
 }

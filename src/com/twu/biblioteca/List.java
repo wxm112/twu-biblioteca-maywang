@@ -10,8 +10,7 @@ import java.util.ArrayList;
 public class List<S> {
     private IO file = new IO();
 
-    public ArrayList<String> getAvailabeBooks(String fileName) {
-        JSONObject data = file.fileReader(fileName);
+    public ArrayList<String> getAvailabeBooks(JSONObject data) {
         ArrayList<String> availableBooks = new ArrayList<String>();
         for (Object o : data.keySet()) {
             String key = (String) o;
@@ -24,6 +23,15 @@ public class List<S> {
             }
         }
         return availableBooks;
+    }
+
+    public ArrayList<String> menuList() {
+        ArrayList<String> menu = new ArrayList<String>();
+        menu.add("Q: Quit");
+        menu.add("C: Checkout book");
+        menu.add("L: List Books");
+        menu.add("R: Return Books");
+        return menu;
     }
 }
 
