@@ -3,6 +3,8 @@ package com.twu.biblioteca;
 import org.json.simple.JSONObject;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static junit.framework.TestCase.assertEquals;
 
 /**
@@ -12,11 +14,11 @@ public class LibrarianTest {
     private Librarian app = new Librarian("./testData.json");
 
 
-    private JSONObject initialize(String checkoutStatus){
+    private JSONObject initialize(String yes, String no){
         JSONObject obj = new JSONObject();
 
         JSONObject bookDetail1 = new JSONObject();
-        bookDetail1.put("Checkout",checkoutStatus);
+        bookDetail1.put("Checkout",yes);
         bookDetail1.put("Author","Johanna Basford");
         bookDetail1.put("PublicationYear", "2015");
         obj.put("SECRET GARDEN", bookDetail1);
@@ -26,7 +28,7 @@ public class LibrarianTest {
         bookDetail2.put("PublicationYear", "2015");
         obj.put("HARRY POTTER COLOURING BOOK", bookDetail2);
         JSONObject bookDetail3 = new JSONObject();
-        bookDetail3.put("Checkout",checkoutStatus);
+        bookDetail3.put("Checkout",no);
         bookDetail3.put("Author","Drew Daywal");
         bookDetail3.put("PublicationYear", "2015");
         obj.put("THE DAY THE CRAYONS QUIT", bookDetail3);
@@ -38,7 +40,7 @@ public class LibrarianTest {
 
     @Test
     public void checkoutBookPassTest() throws Exception {
-        assertEquals(app.checkoutBook("SECRET GARDEN"), initialize("Yes"));
+        assertEquals(app.checkoutBook("SECRET GARDEN"), initialize("Yes","Yes"));
     }
 
 
@@ -54,7 +56,7 @@ public class LibrarianTest {
 
     @Test
     public void returnBookPassTest() throws Exception {
-        assertEquals(app.returnBook("THE DAY THE CRAYONS QUIT"), initialize("No"));
+        assertEquals(app.returnBook("THE DAY THE CRAYONS QUIT"), initialize("No","No"));
     }
 
     @Test
@@ -67,4 +69,16 @@ public class LibrarianTest {
         assertEquals(app.returnBook("tyjed"), null);
     }
 
+    @Test
+    public void getAvailabeBooks() throws Exception {
+        ArrayList<String> availabeBookList = new ArrayList<String>();
+        availabeBookList.add("Book Title: SECRET GARDEN");
+        availabeBookList.add("Author: Johanna Basford");
+        availabeBookList.add("Publication Year: 2015" + "\n");
+        availabeBookList.add("Book Title: HARRY POTTER COLOURING BOOK");
+        availabeBookList.add("Author: Warner Brothers");
+        availabeBookList.add("Publication Year: 2015" + "\n");
+
+        assertEquals(app.getAvailabeBooks(), availabeBookList);
+    }
 }
