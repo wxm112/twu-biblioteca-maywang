@@ -15,26 +15,25 @@ import static org.mockito.Mockito.verify;
  */
 public class LibrarianTest {
     Message mockedMessage = mock(Message.class);
-    Librarian app = new Librarian("./testData.json",mockedMessage);
+    Librarian app = new Librarian("./testData.json", mockedMessage);
 
 
-
-    private JSONObject initialize(String yes, String no){
+    private JSONObject initialize(String yes, String no) {
         JSONObject obj = new JSONObject();
 
         JSONObject bookDetail1 = new JSONObject();
-        bookDetail1.put("Checkout",yes);
-        bookDetail1.put("Author","Johanna Basford");
+        bookDetail1.put("Checkout", yes);
+        bookDetail1.put("Author", "Johanna Basford");
         bookDetail1.put("PublicationYear", "2015");
         obj.put("SECRET GARDEN", bookDetail1);
         JSONObject bookDetail2 = new JSONObject();
-        bookDetail2.put("Checkout","No");
-        bookDetail2.put("Author","Warner Brothers");
+        bookDetail2.put("Checkout", "No");
+        bookDetail2.put("Author", "Warner Brothers");
         bookDetail2.put("PublicationYear", "2015");
         obj.put("HARRY POTTER COLOURING BOOK", bookDetail2);
         JSONObject bookDetail3 = new JSONObject();
-        bookDetail3.put("Checkout",no);
-        bookDetail3.put("Author","Drew Daywal");
+        bookDetail3.put("Checkout", no);
+        bookDetail3.put("Author", "Drew Daywal");
         bookDetail3.put("PublicationYear", "2015");
         obj.put("THE DAY THE CRAYONS QUIT", bookDetail3);
 
@@ -45,39 +44,39 @@ public class LibrarianTest {
 
     @Test
     public void checkoutBookPassTest() throws Exception {
-        assertEquals(app.checkoutBook("SECRET GARDEN"), initialize("Yes","Yes"));
-        verify(mockedMessage, times(1)).printMessasge("checkoutSuccessmessage");
+        assertEquals(app.checkoutBook("SECRET GARDEN"), initialize("Yes", "Yes"));
+        verify(mockedMessage, times(1)).printMessage("checkoutSuccessmessage");
     }
 
 
     @Test
     public void checkoutBookMissWithWrongBookNameTest() throws Exception {
         assertEquals(app.checkoutBook("THE DAY THE CRAYONS QUIT"), null);
-        verify(mockedMessage, times(1)).printMessasge("checkoutUnsuccessmessage");
+        verify(mockedMessage, times(1)).printMessage("checkoutUnsuccessmessage");
     }
 
     @Test
     public void checkoutBookMissWithGibberishTest() throws Exception {
         assertEquals(app.checkoutBook("tyjed"), null);
-        verify(mockedMessage, times(1)).printMessasge("checkoutUnsuccessmessage");
+        verify(mockedMessage, times(1)).printMessage("checkoutUnsuccessmessage");
     }
 
     @Test
     public void returnBookPassTest() throws Exception {
-        assertEquals(app.returnBook("THE DAY THE CRAYONS QUIT"), initialize("No","No"));
-        verify(mockedMessage, times(1)).printMessasge("returnSuccessmessage");
+        assertEquals(app.returnBook("THE DAY THE CRAYONS QUIT"), initialize("No", "No"));
+        verify(mockedMessage, times(1)).printMessage("returnSuccessmessage");
     }
 
     @Test
     public void returnBookPassWithWrongBookTest() throws Exception {
         assertEquals(app.returnBook("SECRET GARDEN"), null);
-        verify(mockedMessage, times(1)).printMessasge("returnUnsuccessmessage");
+        verify(mockedMessage, times(1)).printMessage("returnUnsuccessmessage");
     }
 
     @Test
     public void returnBookMissWithGibberishTest() throws Exception {
         assertEquals(app.returnBook("tyjed"), null);
-        verify(mockedMessage, times(1)).printMessasge("returnUnsuccessmessage");
+        verify(mockedMessage, times(1)).printMessage("returnUnsuccessmessage");
     }
 
     @Test

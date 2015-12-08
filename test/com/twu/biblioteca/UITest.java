@@ -28,7 +28,7 @@ public class UITest {
     public void shouldCallCheckoutBookFunctionTest() throws Exception {
         when(mockedLibrarian.getUserOption()).thenReturn("anyString");
         app.mainMenuHelper("C");
-        verify(mockedMessage, times(1)).printMessasge("EnterBookName");
+        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedLibrarian, times(1)).checkoutBook("anyString");
     }
 
@@ -36,14 +36,14 @@ public class UITest {
      public void shouldCallReturnBookBookFunctionTest() throws Exception {
         when(mockedLibrarian.getUserOption()).thenReturn("anyString");
         app.mainMenuHelper("R");
-        verify(mockedMessage, times(1)).printMessasge("EnterBookName");
+        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedLibrarian, times(1)).returnBook("anyString");
     }
 
     @Test
     public void invalidUnserOptionTest() throws Exception {
         app.mainMenuHelper("x");
-        verify(mockedMessage, times(1)).printMessasge("InvalidOption");
+        verify(mockedMessage, times(1)).printMessage("InvalidOption");
     }
 
     @Test
@@ -57,7 +57,7 @@ public class UITest {
 //        ArrayList<String> menuList = new ArrayList<String>();
 //        when(mockedLibrarian.menuList()).thenReturn(menuList);
 //        app.printMainMenu();
-//        verify(mockedMessage, times(1)).printMessasge("Options");
+//        verify(mockedMessage, times(1)).printMessage("Options");
 //        verify(mockedLibrarian, times(1)).render(menuList);
 //        verify(mockedIo, times(1)).getUserOption();
 //    }

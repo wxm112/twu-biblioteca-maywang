@@ -14,7 +14,7 @@ public class Librarian {
 
     public Librarian(String filename, Message message) {
         this.bookData = new IO().fileReader(filename);
-        this.message = new Message();
+        this.message = message;
     }
 
 
@@ -33,11 +33,11 @@ public class Librarian {
             if (checkoutStatus.equals(no)) {
                 selectedBook.remove("Checkout");
                 selectedBook.put("Checkout", yes);
-                message.printMessasge(functionName + "Successmessage");
+                message.printMessage(functionName + "Successmessage");
                 return bookData;
             }
         }
-        message.printMessasge(functionName + "Unsuccessmessage");
+        message.printMessage(functionName + "Unsuccessmessage");
         return null;
     }
 

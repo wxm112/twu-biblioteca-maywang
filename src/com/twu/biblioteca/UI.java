@@ -15,7 +15,7 @@ public class UI {
 
     public void printMainMenu(){
         while (flag) {
-            message.printMessasge("Options");
+            message.printMessage("Options");
             librarian.render(librarian.menuList());
             mainMenuHelper(librarian.getUserOption());
         }
@@ -27,13 +27,13 @@ public class UI {
         }else if (userInput.equals("L")) {
             librarian.render(librarian.getAvailabeBooks());
         }else if (userInput.equals("C")) {
-            message.printMessasge("EnterBookName");
+            message.printMessage("EnterBookName");
             librarian.checkoutBook(librarian.getUserOption());
         }else if (userInput.equals("R")) {
-            message.printMessasge("EnterBookName");
+            message.printMessage("EnterBookName");
             librarian.returnBook(librarian.getUserOption());
         }else {
-            message.printMessasge("InvalidOption");
+            message.printMessage("InvalidOption");
         }
         return true;
     }

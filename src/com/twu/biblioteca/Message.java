@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
  */
 public class Message {
 
-    public void printMessasge(String messageName){
+    public void printMessage(String messageName){
         JSONObject messages = new JSONObject();
         messages.put("Welcome", "Hello, welcome to Biblioteca!");
         messages.put("Options", "Please let us know your options: ");
