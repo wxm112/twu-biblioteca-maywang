@@ -27,10 +27,8 @@ public class UI {
         }else if (userInput.equals("L")) {
             librarian.render(librarian.getAvailabeBooks());
         }else if (userInput.equals("C")) {
-            message.printMessage("EnterBookName");
             librarian.checkoutBook(librarian.getUserOption());
         }else if (userInput.equals("R")) {
-            message.printMessage("EnterBookName");
             librarian.returnBook(librarian.getUserOption());
         }else {
             message.printMessage("InvalidOption");

@@ -45,6 +45,7 @@ public class LibrarianTest {
     @Test
     public void checkoutBookPassTest() throws Exception {
         assertEquals(app.checkoutBook("SECRET GARDEN"), initialize("Yes", "Yes"));
+        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("checkoutSuccessmessage");
     }
 
@@ -52,30 +53,35 @@ public class LibrarianTest {
     @Test
     public void checkoutBookMissWithWrongBookNameTest() throws Exception {
         assertEquals(app.checkoutBook("THE DAY THE CRAYONS QUIT"), null);
+        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("checkoutUnsuccessmessage");
     }
 
     @Test
     public void checkoutBookMissWithGibberishTest() throws Exception {
         assertEquals(app.checkoutBook("tyjed"), null);
+        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("checkoutUnsuccessmessage");
     }
 
     @Test
     public void returnBookPassTest() throws Exception {
         assertEquals(app.returnBook("THE DAY THE CRAYONS QUIT"), initialize("No", "No"));
+        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("returnSuccessmessage");
     }
 
     @Test
     public void returnBookPassWithWrongBookTest() throws Exception {
         assertEquals(app.returnBook("SECRET GARDEN"), null);
+        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("returnUnsuccessmessage");
     }
 
     @Test
     public void returnBookMissWithGibberishTest() throws Exception {
         assertEquals(app.returnBook("tyjed"), null);
+        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("returnUnsuccessmessage");
     }
 

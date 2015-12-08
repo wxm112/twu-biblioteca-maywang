@@ -28,7 +28,6 @@ public class UITest {
     public void shouldCallCheckoutBookFunctionTest() throws Exception {
         when(mockedLibrarian.getUserOption()).thenReturn("anyString");
         app.mainMenuHelper("C");
-        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedLibrarian, times(1)).checkoutBook("anyString");
     }
 
@@ -36,7 +35,6 @@ public class UITest {
      public void shouldCallReturnBookBookFunctionTest() throws Exception {
         when(mockedLibrarian.getUserOption()).thenReturn("anyString");
         app.mainMenuHelper("R");
-        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedLibrarian, times(1)).returnBook("anyString");
     }
 

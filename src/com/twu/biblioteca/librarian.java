@@ -28,6 +28,7 @@ public class Librarian {
 
     private JSONObject getJsonObject(String bookName, String no, String yes, String functionName) {
         JSONObject selectedBook = (JSONObject) bookData.get(bookName);
+        message.printMessage("EnterBookName");
         if (selectedBook != null) {
             String checkoutStatus = (String) selectedBook.get("Checkout");
             if (checkoutStatus.equals(no)) {
