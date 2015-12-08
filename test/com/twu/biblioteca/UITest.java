@@ -13,8 +13,7 @@ import static org.mockito.Mockito.*;
 public class UITest {
     Librarian mockedLibrarian = mock(Librarian.class);
     Message mockedMessage = mock(Message.class);
-    IO mockedIo = mock(IO.class);
-    UI app = new UI(mockedLibrarian,mockedMessage,mockedIo);
+    UI app = new UI(mockedLibrarian,mockedMessage);
 
 
 
@@ -27,7 +26,7 @@ public class UITest {
 
     @Test
     public void shouldCallCheckoutBookFunctionTest() throws Exception {
-        when(mockedIo.getUserOption()).thenReturn("anyString");
+        when(mockedLibrarian.getUserOption()).thenReturn("anyString");
         app.mainMenuHelper("C");
         verify(mockedMessage, times(1)).printMessasge("EnterBookName");
         verify(mockedLibrarian, times(1)).checkoutBook("anyString");
@@ -35,7 +34,7 @@ public class UITest {
 
     @Test
      public void shouldCallReturnBookBookFunctionTest() throws Exception {
-        when(mockedIo.getUserOption()).thenReturn("anyString");
+        when(mockedLibrarian.getUserOption()).thenReturn("anyString");
         app.mainMenuHelper("R");
         verify(mockedMessage, times(1)).printMessasge("EnterBookName");
         verify(mockedLibrarian, times(1)).returnBook("anyString");

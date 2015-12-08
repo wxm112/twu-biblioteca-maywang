@@ -6,7 +6,6 @@ import org.json.simple.parser.JSONParser;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Created by mayw on 7/12/2015.
@@ -35,11 +34,6 @@ public class IO {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    String getUserOption(){
-        Scanner input = new Scanner(System.in);
-        return input.nextLine().trim().toUpperCase();
     }
 
 }

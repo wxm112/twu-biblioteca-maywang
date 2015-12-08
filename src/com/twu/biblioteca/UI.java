@@ -6,20 +6,18 @@ package com.twu.biblioteca;
 public class UI {
     private Librarian librarian;
     private Message message;
-    private IO io;
     public boolean flag = true;
 
-    public UI(Librarian lib, Message mes,IO file) {
+    public UI(Librarian lib, Message mes) {
         this.librarian = lib;
         this.message = mes;
-        this.io = file;
     }
 
     public void printMainMenu(){
         while (flag) {
             message.printMessasge("Options");
             librarian.render(librarian.menuList());
-            mainMenuHelper(io.getUserOption());
+            mainMenuHelper(librarian.getUserOption());
         }
     }
 
@@ -30,15 +28,16 @@ public class UI {
             librarian.render(librarian.getAvailabeBooks());
         }else if (userInput.equals("C")) {
             message.printMessasge("EnterBookName");
-            librarian.checkoutBook(io.getUserOption());
+            librarian.checkoutBook(librarian.getUserOption());
         }else if (userInput.equals("R")) {
             message.printMessasge("EnterBookName");
-            librarian.returnBook(io.getUserOption());
+            librarian.returnBook(librarian.getUserOption());
         }else {
             message.printMessasge("InvalidOption");
         }
         return true;
     }
+
 
 
 }

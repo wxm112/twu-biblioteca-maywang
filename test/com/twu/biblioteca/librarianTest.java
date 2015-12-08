@@ -6,12 +6,17 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by mayw on 7/12/2015.
  */
 public class LibrarianTest {
-    private Librarian app = new Librarian("./testData.json");
+    Message mockedMessage = mock(Message.class);
+    Librarian app = new Librarian("./testData.json",mockedMessage);
+
 
 
     private JSONObject initialize(String yes, String no){
@@ -41,32 +46,38 @@ public class LibrarianTest {
     @Test
     public void checkoutBookPassTest() throws Exception {
         assertEquals(app.checkoutBook("SECRET GARDEN"), initialize("Yes","Yes"));
+        verify(mockedMessage, times(1)).printMessasge("checkoutSuccessmessage");
     }
 
 
     @Test
     public void checkoutBookMissWithWrongBookNameTest() throws Exception {
         assertEquals(app.checkoutBook("THE DAY THE CRAYONS QUIT"), null);
+        verify(mockedMessage, times(1)).printMessasge("checkoutUnsuccessmessage");
     }
 
     @Test
     public void checkoutBookMissWithGibberishTest() throws Exception {
         assertEquals(app.checkoutBook("tyjed"), null);
+        verify(mockedMessage, times(1)).printMessasge("checkoutUnsuccessmessage");
     }
 
     @Test
     public void returnBookPassTest() throws Exception {
         assertEquals(app.returnBook("THE DAY THE CRAYONS QUIT"), initialize("No","No"));
+        verify(mockedMessage, times(1)).printMessasge("returnSuccessmessage");
     }
 
     @Test
     public void returnBookPassWithWrongBookTest() throws Exception {
         assertEquals(app.returnBook("SECRET GARDEN"), null);
+        verify(mockedMessage, times(1)).printMessasge("returnUnsuccessmessage");
     }
 
     @Test
     public void returnBookMissWithGibberishTest() throws Exception {
         assertEquals(app.returnBook("tyjed"), null);
+        verify(mockedMessage, times(1)).printMessasge("returnUnsuccessmessage");
     }
 
     @Test

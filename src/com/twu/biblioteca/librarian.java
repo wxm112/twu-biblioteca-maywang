@@ -3,16 +3,18 @@ package com.twu.biblioteca;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by mayw on 7/12/2015.
  */
 public class Librarian {
     private final JSONObject bookData;
-    private Message mess = new Message();
+    private Message message;
 
-    public Librarian(String filename) {
+    public Librarian(String filename, Message message) {
         this.bookData = new IO().fileReader(filename);
+        this.message = new Message();
     }
 
 
@@ -31,11 +33,11 @@ public class Librarian {
             if (checkoutStatus.equals(no)) {
                 selectedBook.remove("Checkout");
                 selectedBook.put("Checkout", yes);
-                mess.printMessasge(functionName + "Successmessage");
+                message.printMessasge(functionName + "Successmessage");
                 return bookData;
             }
         }
-        mess.printMessasge(functionName + "Unsuccessmessage");
+        message.printMessasge(functionName + "Unsuccessmessage");
         return null;
     }
 
@@ -67,6 +69,11 @@ public class Librarian {
         for ( String option : options) {
             System.out.println(option);
         }
+    }
+
+    public String getUserOption(){
+        Scanner input = new Scanner(System.in);
+        return input.nextLine().trim().toUpperCase();
     }
 
 }
