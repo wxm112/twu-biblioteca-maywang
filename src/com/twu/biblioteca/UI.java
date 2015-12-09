@@ -6,7 +6,9 @@ package com.twu.biblioteca;
 public class UI {
     private Librarian librarian;
     private Message message;
-    public boolean flag = true;
+    private boolean flag = true;
+
+    public boolean getFlag(){return flag;}
 
     public UI(Librarian lib, Message mes) {
         this.librarian = lib;

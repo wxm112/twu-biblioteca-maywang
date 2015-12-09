@@ -47,7 +47,7 @@ public class UITest {
     @Test
     public void teturnOptionTest() throws Exception {
         app.mainMenuHelper("Q");
-        assertEquals(app.flag, false);
+        assertEquals(app.getFlag(), false);
     }
 
 //    @Test
