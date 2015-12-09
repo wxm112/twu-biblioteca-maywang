@@ -44,9 +44,10 @@ public class Librarian {
 
     public ArrayList<String> getAvailabeBooks() {
         ArrayList<String> availableBooks = new ArrayList<String>();
-        for (Object o : this.bookData.keySet()) {
+        JSONObject books = (JSONObject)this.bookData.get("BOOKS");
+        for (Object o : books.keySet()) {
             String key = (String) o;
-            JSONObject details = (JSONObject) this.bookData.get(key);
+            JSONObject details = (JSONObject) books.get(key);
             Object checkoutStatus = details.get("Checkout");
             if (checkoutStatus.equals(false)) {
                 availableBooks.add("Book Title: " + key);
