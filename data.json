@@ -1,1 +1,1 @@
-{"SECRET GARDEN":{"Checkout":"No","Author":"Johanna Basford","PublicationYear":"2015"},"HARRY POTTER COLOURING BOOK":{"Checkout":"No","Author":"Warner Brothers","PublicationYear":"2015"},"THE DAY THE CRAYONS QUIT":{"Checkout":"Yes","Author":"Drew Daywal","PublicationYear":"2015"}}
+{"SECRET GARDEN":{"Checkout":false,"Author":"Johanna Basford","PublicationYear":"2015"},"HARRY POTTER COLOURING BOOK":{"Checkout":false,"Author":"Warner Brothers","PublicationYear":"2015"},"THE DAY THE CRAYONS QUIT":{"Checkout":true,"Author":"Drew Daywal","PublicationYear":"2015"}}
