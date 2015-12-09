@@ -19,21 +19,21 @@ public class Librarian {
 
 
     public JSONObject checkoutBook(String bookName) {
-        return getJsonObject(bookName, "No", "Yes", "checkout");
+        return getJsonObject(bookName, true, "checkout");
     }
 
     public JSONObject returnBook(String bookName) {
-        return getJsonObject(bookName, "Yes", "No","return");
+        return getJsonObject(bookName, false,"return");
     }
 
-    private JSONObject getJsonObject(String bookName, String no, String yes, String functionName) {
+    private JSONObject getJsonObject(String bookName, boolean newCheckoutStatus, String functionName) {
         JSONObject selectedBook = (JSONObject) bookData.get(bookName);
         message.printMessage("EnterBookName");
         if (selectedBook != null) {
-            String checkoutStatus = (String) selectedBook.get("Checkout");
-            if (checkoutStatus.equals(no)) {
+            Object checkoutStatus = selectedBook.get("Checkout");
+            if (!checkoutStatus.equals(newCheckoutStatus)) {
                 selectedBook.remove("Checkout");
-                selectedBook.put("Checkout", yes);
+                selectedBook.put("Checkout", newCheckoutStatus);
                 message.printMessage(functionName + "Successmessage");
                 return bookData;
             }
@@ -47,8 +47,8 @@ public class Librarian {
         for (Object o : this.bookData.keySet()) {
             String key = (String) o;
             JSONObject details = (JSONObject) this.bookData.get(key);
-            String checkout = (String) details.get("Checkout");
-            if ("No".equals(checkout)) {
+            Object checkoutStatus = details.get("Checkout");
+            if (checkoutStatus.equals(false)) {
                 availableBooks.add("Book Title: " + key);
                 availableBooks.add("Author: " + details.get("Author"));
                 availableBooks.add("Publication Year: " + details.get("PublicationYear") + "\n");
