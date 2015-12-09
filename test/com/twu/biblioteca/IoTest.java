@@ -13,50 +13,66 @@ public class IoTest {
 
     private IO file = new IO();
 
-    @Test
-    public void fileReaderTest() throws Exception {
+    private JSONObject initialize(boolean checkoutStatus1, boolean checkoutStatus2) {
         JSONObject obj = new JSONObject();
-        obj.put("Checkout", false);
-        obj.put("Author", "Johanna Basford");
-        obj.put("PublicationYear", "2015");
-        assertEquals(obj, file.fileReader("./testData.json").get("SECRET GARDEN"));
-    }
 
-    @Test
-    public void updateJasonFileTest() throws Exception {
-        JSONObject obj = new JSONObject();
-        JSONObject bookDetails = new JSONObject();
-        bookDetails.put("Checkout", true);
-        bookDetails.put("Author", "Xuemei");
-        bookDetails.put("PublicationYear", "2000");
-        obj.put("SECRET GARDEN", bookDetails);
-        file.updateJasonFile(obj, "./testData.json");
-
-        JSONObject checkoutStatus = (JSONObject) file.fileReader("./testData.json").get("SECRET GARDEN");
-        assertEquals(true, checkoutStatus.get("Checkout"));
-        assertEquals("Xuemei", checkoutStatus.get("Author"));
-        assertEquals("2000", checkoutStatus.get("PublicationYear"));
-    }
-
-    @After
-    public void recoverData() {
-        JSONObject obj = new JSONObject();
+        //Created booksObject with three book objects;
+        JSONObject booksObj = new JSONObject();
         JSONObject bookDetail1 = new JSONObject();
-        bookDetail1.put("Checkout", false);
+        bookDetail1.put("Checkout", checkoutStatus1);
         bookDetail1.put("Author", "Johanna Basford");
         bookDetail1.put("PublicationYear", "2015");
-        obj.put("SECRET GARDEN", bookDetail1);
+        booksObj.put("SECRET GARDEN", bookDetail1);
         JSONObject bookDetail2 = new JSONObject();
         bookDetail2.put("Checkout", false);
         bookDetail2.put("Author", "Warner Brothers");
         bookDetail2.put("PublicationYear", "2015");
-        obj.put("HARRY POTTER COLOURING BOOK", bookDetail2);
+        booksObj.put("HARRY POTTER COLOURING BOOK", bookDetail2);
         JSONObject bookDetail3 = new JSONObject();
-        bookDetail3.put("Checkout", true);
+        bookDetail3.put("Checkout", checkoutStatus2);
         bookDetail3.put("Author", "Drew Daywal");
         bookDetail3.put("PublicationYear", "2015");
-        obj.put("THE DAY THE CRAYONS QUIT", bookDetail3);
-        file.updateJasonFile(obj, "./testData.json");
+        booksObj.put("THE DAY THE CRAYONS QUIT", bookDetail3);
+
+        //Created moviesObject with two movie objects;
+        JSONObject movieObj = new JSONObject();
+        JSONObject movieDetail1 = new JSONObject();
+        movieDetail1.put("Checkout",false);
+        movieDetail1.put("Year", "2011");
+        movieDetail1.put("Director", "Director1");
+        movieDetail1.put("Rate", "1");
+        movieObj.put("Movie1", movieDetail1);
+        JSONObject movieDetail2 = new JSONObject();
+        movieDetail2.put("Checkout",true);
+        movieDetail2.put("Year", "2012");
+        movieDetail2.put("Director", "Director2");
+        movieDetail2.put("Rate", "2");
+        movieObj.put("Movie2", movieDetail2);
+
+        //put booksObject and moviesObject to one object
+        obj.put("BOOKS",booksObj);
+        obj.put("MOVIES",movieObj);
+
+        return obj;
+
+    }
+
+
+    @Test
+    public void fileReaderTest() throws Exception {
+        assertEquals(initialize(false,true),file.fileReader("./testData.json"));
+    }
+
+    @Test
+    public void updateJasonFileTest() throws Exception {
+        file.updateJasonFile(initialize(true,true), "./testData.json");
+        assertEquals(initialize(true,true).get("BOOKS"), file.fileReader("./testData.json").get("BOOKS"));
+
+    }
+
+    @After
+    public void recoverData() {
+        file.updateJasonFile(initialize(false,true), "./testData.json");
     }
 
 }
