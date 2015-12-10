@@ -2,7 +2,7 @@ package com.twu.biblioteca;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -19,7 +19,7 @@ public class UITest {
 
     @Test
     public void shouldCallRenderFunctionTest() throws Exception {
-        ArrayList<String> bookList = mockedLibrarian.getAvailableBooks();
+        List<String> bookList = mockedLibrarian.getAvailableItemsOfType("Book");
         app.mainMenuHelper("L");
         verify(mockedLibrarian, times(1)).render(bookList);
     }

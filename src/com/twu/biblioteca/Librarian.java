@@ -83,7 +83,7 @@ public class Librarian {
         return input.nextLine().trim().toUpperCase();
     }
 
-    private List<String> getAvailableItemsOfType(String itemType) {
+    public List<String> getAvailableItemsOfType(String itemType) {
         List<String> availableItems = new ArrayList<String>();
         JSONObject items = (JSONObject) this.data.get(itemType);
         for (Object o : items.keySet()) {
