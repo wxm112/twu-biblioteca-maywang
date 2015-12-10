@@ -54,39 +54,14 @@ public class Librarian {
         return null;
     }
 
+
     public List<String> getAvailableBooks() {
-        List<String> availableBooks = new ArrayList<String>();
-        JSONObject books = (JSONObject) this.data.get("Book");
-        for (Object o : books.keySet()) {
-            String key = (String) o;
-            JSONObject details = (JSONObject) books.get(key);
-            Object checkoutStatus = details.get("Checkout");
-            if (checkoutStatus.equals(false)) {
-                availableBooks.add("Book Title: " + key);
-                availableBooks.add("Author: " + details.get("Author"));
-                availableBooks.add("Publication Year: " + details.get("PublicationYear") + "\n");
-            }
-        }
-        return availableBooks;
+        return getAvailableItemsOfType("Book");
     }
 
     public List<String> getAvailableMovies() {
-        List<String> availableMovies = new ArrayList<String>();
-        JSONObject movies = (JSONObject) this.data.get("Movie");
-        for (Object o : movies.keySet()) {
-            String key = (String) o;
-            JSONObject details = (JSONObject) movies.get(key);
-            Object checkoutStatus = details.get("Checkout");
-            if (checkoutStatus.equals(false)) {
-                availableMovies.add("Movie Title: " + key);
-                availableMovies.add("Year: " + details.get("Year"));
-                availableMovies.add("Rate: " + details.get("Rate"));
-                availableMovies.add("Director: " + details.get("Director") + "\n");
-            }
-        }
-        return availableMovies;
+        return getAvailableItemsOfType("Movie");
     }
-
 
     public List<String> menuList() {
         List<String> menu = new ArrayList<String>();
@@ -106,6 +81,33 @@ public class Librarian {
     public String getUserOption() {
         Scanner input = new Scanner(System.in);
         return input.nextLine().trim().toUpperCase();
+    }
+
+    private List<String> getAvailableItemsOfType(String itemType) {
+        List<String> availableItems = new ArrayList<String>();
+        JSONObject items = (JSONObject) this.data.get(itemType);
+        for (Object o : items.keySet()) {
+            String key = (String) o;
+            JSONObject details = (JSONObject) items.get(key);
+            Object checkoutStatus = details.get("Checkout");
+            if (checkoutStatus.equals(false)) {
+                addItemToList(availableItems, itemType, key, details);
+            }
+        }
+        return availableItems;
+    }
+
+    private void addItemToList(List<String> items, String itemType, String key, JSONObject details) {
+        if (itemType.equals("Book")) {
+            items.add("Book Title: " + key);
+            items.add("Author: " + details.get("Author"));
+            items.add("Publication Year: " + details.get("PublicationYear") + "\n");
+        } else if (itemType.equals("Movie")) {
+            items.add("Movie Title: " + key);
+            items.add("Year: " + details.get("Year"));
+            items.add("Rate: " + details.get("Rate"));
+            items.add("Director: " + details.get("Director") + "\n");
+        }
     }
 
 }
