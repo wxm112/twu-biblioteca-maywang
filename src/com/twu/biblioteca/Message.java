@@ -13,10 +13,15 @@ public class Message {
         messages.put("Options", "Please let us know your options: ");
         messages.put("InvalidOption", "Select a invalid option!");
         messages.put("EnterBookName", "Please enter the book's name: ");
-        messages.put("checkoutSuccessmessage", "Thank you! Enjoy the book");
-        messages.put("checkoutUnsuccessmessage", "That book is not available.");
-        messages.put("returnSuccessmessage", "Thank you for returning the book.");
-        messages.put("returnUnsuccessmessage", "That is not a valid book to return.");
+        messages.put("EnterMovieName", "Please enter the movie's name: ");
+        messages.put("checkoutBookSuccessmessage", "Thank you! Enjoy the book");
+        messages.put("checkoutBookUnsuccessmessage", "That book is not available.");
+        messages.put("checkoutMovieSuccessmessage", "Thank you! Enjoy the movie");
+        messages.put("checkoutMovieUnsuccessmessage", "That movie is not available.");
+        messages.put("returnBookSuccessmessage", "Thank you for returning the book.");
+        messages.put("returnBookUnsuccessmessage", "That is not a valid book to return.");
+        messages.put("returnMovieSuccessmessage", "Thank you for returning the movie.");
+        messages.put("returnMovieUnsuccessmessage", "That is not a valid movie to return.");
 
         System.out.println(messages.get(messageName) + "\n");
     }

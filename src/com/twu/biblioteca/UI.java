@@ -27,7 +27,7 @@ public class UI {
         if (userInput.equals("Q")) {
             flag = false;
         }else if (userInput.equals("L")) {
-            librarian.render(librarian.getAvailabeBooks());
+            librarian.render(librarian.getAvailableBooks());
         }else if (userInput.equals("C")) {
             librarian.checkoutBook(librarian.getUserOption());
         }else if (userInput.equals("R")) {

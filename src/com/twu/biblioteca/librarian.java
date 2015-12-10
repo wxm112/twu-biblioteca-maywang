@@ -9,42 +9,51 @@ import java.util.Scanner;
  * Created by mayw on 7/12/2015.
  */
 public class Librarian {
-    private final JSONObject bookData;
+    private final JSONObject data;
     private Message message;
 
     public Librarian(String filename, Message message) {
-        this.bookData = new IO().fileReader(filename);
+        this.data = new IO().fileReader(filename);
         this.message = message;
     }
 
 
     public JSONObject checkoutBook(String bookName) {
-        return getJsonObject(bookName, true, "checkout");
+        return changeCheckoutStatus(bookName, "Book", true, "checkout");
     }
 
     public JSONObject returnBook(String bookName) {
-        return getJsonObject(bookName, false,"return");
+        return changeCheckoutStatus(bookName, "Book", false, "return");
     }
 
-    private JSONObject getJsonObject(String bookName, boolean newCheckoutStatus, String functionName) {
-        JSONObject selectedBook = (JSONObject) bookData.get(bookName);
-        message.printMessage("EnterBookName");
-        if (selectedBook != null) {
-            Object checkoutStatus = selectedBook.get("Checkout");
+    public JSONObject checkoutMovie(String moiveName) {
+        return changeCheckoutStatus(moiveName, "Movie", true, "checkout");
+    }
+
+    public JSONObject returnMovie(String bookName) {
+        return changeCheckoutStatus(bookName, "Movie", false, "return");
+    }
+
+    private JSONObject changeCheckoutStatus(String itemName, String listName, boolean newCheckoutStatus, String functionName) {
+        JSONObject list = (JSONObject) data.get(listName);
+        JSONObject selectedItem = (JSONObject) list.get(itemName);
+        message.printMessage("Enter" + listName + "Name");
+        if (selectedItem != null) {
+            Object checkoutStatus = selectedItem.get("Checkout");
             if (!checkoutStatus.equals(newCheckoutStatus)) {
-                selectedBook.remove("Checkout");
-                selectedBook.put("Checkout", newCheckoutStatus);
-                message.printMessage(functionName + "Successmessage");
-                return bookData;
+                selectedItem.remove("Checkout");
+                selectedItem.put("Checkout", newCheckoutStatus);
+                message.printMessage(functionName + listName + "Successmessage");
+                return data;
             }
         }
-        message.printMessage(functionName + "Unsuccessmessage");
+        message.printMessage(functionName + listName + "Unsuccessmessage");
         return null;
     }
 
-    public ArrayList<String> getAvailabeBooks() {
+    public ArrayList<String> getAvailableBooks() {
         ArrayList<String> availableBooks = new ArrayList<String>();
-        JSONObject books = (JSONObject)this.bookData.get("BOOKS");
+        JSONObject books = (JSONObject)this.data.get("Book");
         for (Object o : books.keySet()) {
             String key = (String) o;
             JSONObject details = (JSONObject) books.get(key);
@@ -57,6 +66,24 @@ public class Librarian {
         }
         return availableBooks;
     }
+
+    public ArrayList<String> getAvailableMovies() {
+        ArrayList<String> availableMovies = new ArrayList<String>();
+        JSONObject movies = (JSONObject)this.data.get("Movie");
+        for (Object o : movies.keySet()) {
+            String key = (String) o;
+            JSONObject details = (JSONObject) movies.get(key);
+            Object checkoutStatus = details.get("Checkout");
+            if (checkoutStatus.equals(false)) {
+                availableMovies.add("Movie Title: " + key);
+                availableMovies.add("Year: " + details.get("Year"));
+                availableMovies.add("Rate: " + details.get("Rate"));
+                availableMovies.add("Director: " + details.get("Director") + "\n");
+            }
+        }
+        return availableMovies;
+    }
+
 
     public ArrayList<String> menuList() {
         ArrayList<String> menu = new ArrayList<String>();

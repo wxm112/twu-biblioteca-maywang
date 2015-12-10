@@ -19,7 +19,7 @@ public class UITest {
 
     @Test
     public void shouldCallRenderFunctionTest() throws Exception {
-        ArrayList<String> bookList = mockedLibrarian.getAvailabeBooks();
+        ArrayList<String> bookList = mockedLibrarian.getAvailableBooks();
         app.mainMenuHelper("L");
         verify(mockedLibrarian, times(1)).render(bookList);
     }
