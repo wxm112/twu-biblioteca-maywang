@@ -160,7 +160,7 @@ public class LibrarianTest {
     }
 
     @Test
-    public void getAvailabeBooks() throws Exception {
+    public void testThatTheExpectedBooksAreThere() throws Exception {
         ArrayList<String> availabeBookList = new ArrayList<String>();
         availabeBookList.add("Book Title: SECRET GARDEN");
         availabeBookList.add("Author: Johanna Basford");
@@ -173,7 +173,7 @@ public class LibrarianTest {
     }
 
     @Test
-    public void getAvailabeMovies() throws Exception {
+    public void testThatTheExpectedMoviesAreThere() throws Exception {
         ArrayList<String> availabeMoviesList = new ArrayList<String>();
         availabeMoviesList.add("Movie Title: Movie1");
         availabeMoviesList.add("Year: 2011");
