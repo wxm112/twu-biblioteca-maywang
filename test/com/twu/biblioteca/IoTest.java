@@ -66,7 +66,7 @@ public class IoTest {
     @Test
     public void updateJasonFileTest() throws Exception {
         file.updateJasonFile(initialize(true,true), "./testData.json");
-        assertEquals(initialize(true,true).get("BOOKS"), file.fileReader("./testData.json").get("BOOKS"));
+        assertEquals(initialize(true,true), file.fileReader("./testData.json"));
 
     }
 
