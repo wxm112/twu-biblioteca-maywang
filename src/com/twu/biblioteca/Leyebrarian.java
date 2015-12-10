@@ -3,18 +3,16 @@ package com.twu.biblioteca;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by mayw on 7/12/2015.
- */
-public class Librarian {
+public class Leyebrarian {
     private JSONObject data;
     private Message message;
     private IO io;
     private String file;
 
-    public Librarian(String filename, Message message,IO io) {
+    public Leyebrarian(String filename, Message message, IO io) {
         this.file = filename;
         this.io = io;
         this.data = io.fileReader(file);
@@ -56,9 +54,9 @@ public class Librarian {
         return null;
     }
 
-    public ArrayList<String> getAvailableBooks() {
-        ArrayList<String> availableBooks = new ArrayList<String>();
-        JSONObject books = (JSONObject)this.data.get("Book");
+    public List<String> getAvailableBooks() {
+        List<String> availableBooks = new ArrayList<String>();
+        JSONObject books = (JSONObject) this.data.get("Book");
         for (Object o : books.keySet()) {
             String key = (String) o;
             JSONObject details = (JSONObject) books.get(key);
@@ -72,9 +70,9 @@ public class Librarian {
         return availableBooks;
     }
 
-    public ArrayList<String> getAvailableMovies() {
-        ArrayList<String> availableMovies = new ArrayList<String>();
-        JSONObject movies = (JSONObject)this.data.get("Movie");
+    public List<String> getAvailableMovies() {
+        List<String> availableMovies = new ArrayList<String>();
+        JSONObject movies = (JSONObject) this.data.get("Movie");
         for (Object o : movies.keySet()) {
             String key = (String) o;
             JSONObject details = (JSONObject) movies.get(key);
@@ -90,8 +88,8 @@ public class Librarian {
     }
 
 
-    public ArrayList<String> menuList() {
-        ArrayList<String> menu = new ArrayList<String>();
+    public List<String> menuList() {
+        List<String> menu = new ArrayList<String>();
         menu.add("Q: Quit");
         menu.add("C: Checkout book");
         menu.add("L: List Books");
@@ -99,13 +97,13 @@ public class Librarian {
         return menu;
     }
 
-    public void render(ArrayList<String> options){
-        for ( String option : options) {
+    public void render(List<String> options) {
+        for (String option : options) {
             System.out.println(option);
         }
     }
 
-    public String getUserOption(){
+    public String getUserOption() {
         Scanner input = new Scanner(System.in);
         return input.nextLine().trim().toUpperCase();
     }
