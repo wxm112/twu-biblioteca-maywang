@@ -6,16 +6,15 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by mayw on 7/12/2015.
  */
 public class LibrarianTest {
     Message mockedMessage = mock(Message.class);
-    Librarian app = new Librarian("./testData.json", mockedMessage);
+    IO mockedIo = mock(IO.class);
+    Librarian app = new Librarian("./testData.json", mockedMessage, mockedIo);
 
     private JSONObject initializeBooksStatus(boolean firstCheckoutStatus, boolean secondCheckoutStatus){
         return initialize(firstCheckoutStatus,secondCheckoutStatus,false,true);
@@ -76,6 +75,7 @@ public class LibrarianTest {
         assertEquals(app.checkoutBook("SECRET GARDEN"), initializeBooksStatus(true, true));
         verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("checkoutBookSuccessmessage");
+        verify(mockedIo, times(1)).updateJasonFile(initializeBooksStatus(true, true),"./testData.json");
     }
 
     @Test
@@ -83,6 +83,7 @@ public class LibrarianTest {
         assertEquals(app.checkoutBook("THE DAY THE CRAYONS QUIT"), null);
         verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("checkoutBookUnsuccessmessage");
+        verify(mockedIo, never()).updateJasonFile(new JSONObject(),"ddd");
     }
 
     @Test
@@ -90,6 +91,7 @@ public class LibrarianTest {
         assertEquals(app.checkoutBook("tyjed"), null);
         verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("checkoutBookUnsuccessmessage");
+        verify(mockedIo, never()).updateJasonFile(new JSONObject(),"ddd");
     }
 
     @Test
@@ -97,13 +99,15 @@ public class LibrarianTest {
         assertEquals(app.returnBook("THE DAY THE CRAYONS QUIT"), initializeBooksStatus(false, false));
         verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("returnBookSuccessmessage");
+        verify(mockedIo, times(1)).updateJasonFile(initializeBooksStatus(false, false),"./testData.json");
     }
 
     @Test
-    public void returnBookPassWithWrongBookTest() throws Exception {
+    public void returnBookMissWithWrongBookTest() throws Exception {
         assertEquals(app.returnBook("SECRET GARDEN"), null);
         verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("returnBookUnsuccessmessage");
+        verify(mockedIo, never()).updateJasonFile(new JSONObject(),"ddd");
     }
 
     @Test
@@ -111,6 +115,7 @@ public class LibrarianTest {
         assertEquals(app.returnBook("tyjed"), null);
         verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("returnBookUnsuccessmessage");
+        verify(mockedIo, never()).updateJasonFile(new JSONObject(),"ddd");
     }
 
     @Test
@@ -118,6 +123,7 @@ public class LibrarianTest {
         assertEquals(app.checkoutMovie("Movie1"), initializeMoviesStatus(true, true));
         verify(mockedMessage, times(1)).printMessage("EnterMovieName");
         verify(mockedMessage, times(1)).printMessage("checkoutMovieSuccessmessage");
+        verify(mockedIo, times(1)).updateJasonFile(initializeMoviesStatus(true, true),"./testData.json");
     }
 
     @Test
@@ -125,6 +131,7 @@ public class LibrarianTest {
         assertEquals(app.checkoutMovie("Movie0"), null);
         verify(mockedMessage, times(1)).printMessage("EnterMovieName");
         verify(mockedMessage, times(1)).printMessage("checkoutMovieUnsuccessmessage");
+        verify(mockedIo, never()).updateJasonFile(new JSONObject(),"ddd");
     }
 
     @Test
@@ -132,6 +139,7 @@ public class LibrarianTest {
         assertEquals(app.checkoutMovie("Movie0"), null);
         verify(mockedMessage, times(1)).printMessage("EnterMovieName");
         verify(mockedMessage, times(1)).printMessage("checkoutMovieUnsuccessmessage");
+        verify(mockedIo, never()).updateJasonFile(new JSONObject(),"ddd");
     }
 
     @Test
@@ -139,20 +147,23 @@ public class LibrarianTest {
         assertEquals(app.returnMovie("Movie2"), initializeMoviesStatus(false, false));
         verify(mockedMessage, times(1)).printMessage("EnterMovieName");
         verify(mockedMessage, times(1)).printMessage("returnMovieSuccessmessage");
+        verify(mockedIo, times(1)).updateJasonFile(initializeMoviesStatus(false, false),"./testData.json");
     }
 
     @Test
-    public void returnMoviePassWithWrongMovieTest() throws Exception {
+    public void returnMovieMissWithWrongMovieTest() throws Exception {
         assertEquals(app.returnMovie("Movie0"), null);
         verify(mockedMessage, times(1)).printMessage("EnterMovieName");
         verify(mockedMessage, times(1)).printMessage("returnMovieUnsuccessmessage");
+        verify(mockedIo, never()).updateJasonFile(new JSONObject(),"ddd");
     }
 
     @Test
-    public void returnMoviePassWithGibberishTest() throws Exception {
+    public void returnMovieMissWithGibberishTest() throws Exception {
         assertEquals(app.returnMovie("kwkw"), null);
         verify(mockedMessage, times(1)).printMessage("EnterMovieName");
         verify(mockedMessage, times(1)).printMessage("returnMovieUnsuccessmessage");
+        verify(mockedIo, never()).updateJasonFile(new JSONObject(),"ddd");
     }
 
     @Test

@@ -3,7 +3,8 @@ package com.twu.biblioteca;
 public class BibliotecaApp {
     private UI ui;
     private Message message = new Message();
-    private Librarian librarian = new Librarian("./data.json", message);
+    private IO io = new IO();
+    private Librarian librarian = new Librarian("./data.json", message,io);
 
     public BibliotecaApp() {
         this.ui = new UI(librarian,message);

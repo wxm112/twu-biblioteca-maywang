@@ -50,8 +50,8 @@ public class IoTest {
         movieObj.put("Movie2", movieDetail2);
 
         //put booksObject and moviesObject to one object
-        obj.put("BOOKS",booksObj);
-        obj.put("MOVIES",movieObj);
+        obj.put("Book",booksObj);
+        obj.put("Movie",movieObj);
 
         return obj;
 

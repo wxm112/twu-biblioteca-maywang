@@ -9,11 +9,15 @@ import java.util.Scanner;
  * Created by mayw on 7/12/2015.
  */
 public class Librarian {
-    private final JSONObject data;
+    private JSONObject data;
     private Message message;
+    private IO io;
+    private String file;
 
-    public Librarian(String filename, Message message) {
-        this.data = new IO().fileReader(filename);
+    public Librarian(String filename, Message message,IO ioClass) {
+        this.file = filename;
+        this.io = ioClass;
+        this.data = new IO().fileReader(file);
         this.message = message;
     }
 
@@ -35,6 +39,7 @@ public class Librarian {
     }
 
     private JSONObject changeCheckoutStatus(String itemName, String listName, boolean newCheckoutStatus, String functionName) {
+//        System.out.println(data);
         JSONObject list = (JSONObject) data.get(listName);
         JSONObject selectedItem = (JSONObject) list.get(itemName);
         message.printMessage("Enter" + listName + "Name");
@@ -44,6 +49,7 @@ public class Librarian {
                 selectedItem.remove("Checkout");
                 selectedItem.put("Checkout", newCheckoutStatus);
                 message.printMessage(functionName + listName + "Successmessage");
+                io.updateJasonFile(data,file);
                 return data;
             }
         }
