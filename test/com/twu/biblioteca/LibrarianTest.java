@@ -12,10 +12,10 @@ import static org.mockito.Mockito.*;
 /**
  * Created by mayw on 7/12/2015.
  */
-public class LeyebrarianTest {
+public class LibrarianTest {
     Message mockedMessage = mock(Message.class);
     IO io = new IO();
-    Leyebrarian app = new Leyebrarian("./testData.json", mockedMessage, io);
+    Librarian app = new Librarian("./testData.json", mockedMessage, io);
 
     private JSONObject initializeBooksStatus(boolean firstCheckoutStatus, boolean secondCheckoutStatus){
         return initialize(firstCheckoutStatus,secondCheckoutStatus,false,true);

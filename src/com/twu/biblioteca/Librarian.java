@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Leyebrarian {
+public class Librarian {
     private JSONObject data;
     private Message message;
     private IO io;
     private String file;
 
-    public Leyebrarian(String filename, Message message, IO io) {
+    public Librarian(String filename, Message message, IO io) {
         this.file = filename;
         this.io = io;
         this.data = io.fileReader(file);

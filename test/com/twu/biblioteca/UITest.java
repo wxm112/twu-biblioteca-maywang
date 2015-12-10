@@ -11,31 +11,31 @@ import static org.mockito.Mockito.*;
  * Created by mayw on 8/12/2015.
  */
 public class UITest {
-    Leyebrarian mockedLeyebrarian = mock(Leyebrarian.class);
+    Librarian mockedLibrarian = mock(Librarian.class);
     Message mockedMessage = mock(Message.class);
-    UI app = new UI(mockedLeyebrarian,mockedMessage);
+    UI app = new UI(mockedLibrarian,mockedMessage);
 
 
 
     @Test
     public void shouldCallRenderFunctionTest() throws Exception {
-        ArrayList<String> bookList = mockedLeyebrarian.getAvailableBooks();
+        ArrayList<String> bookList = mockedLibrarian.getAvailableBooks();
         app.mainMenuHelper("L");
-        verify(mockedLeyebrarian, times(1)).render(bookList);
+        verify(mockedLibrarian, times(1)).render(bookList);
     }
 
     @Test
     public void shouldCallCheckoutBookFunctionTest() throws Exception {
-        when(mockedLeyebrarian.getUserOption()).thenReturn("anyString");
+        when(mockedLibrarian.getUserOption()).thenReturn("anyString");
         app.mainMenuHelper("C");
-        verify(mockedLeyebrarian, times(1)).checkoutBook("anyString");
+        verify(mockedLibrarian, times(1)).checkoutBook("anyString");
     }
 
     @Test
      public void shouldCallReturnBookBookFunctionTest() throws Exception {
-        when(mockedLeyebrarian.getUserOption()).thenReturn("anyString");
+        when(mockedLibrarian.getUserOption()).thenReturn("anyString");
         app.mainMenuHelper("R");
-        verify(mockedLeyebrarian, times(1)).returnBook("anyString");
+        verify(mockedLibrarian, times(1)).returnBook("anyString");
     }
 
     @Test

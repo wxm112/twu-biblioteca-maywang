@@ -4,10 +4,10 @@ public class BibliotecaApp {
     private UI ui;
     private Message message = new Message();
     private IO io = new IO();
-    private Leyebrarian leyebrarian = new Leyebrarian("./data.json", message,io);
+    private Librarian librarian = new Librarian("./data.json", message,io);
 
     public BibliotecaApp() {
-        this.ui = new UI(leyebrarian,message);
+        this.ui = new UI(librarian,message);
     }
 
 

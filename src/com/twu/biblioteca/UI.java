@@ -4,22 +4,22 @@ package com.twu.biblioteca;
  * Created by mayw on 8/12/2015.
  */
 public class UI {
-    private Leyebrarian leyebrarian;
+    private Librarian librarian;
     private Message message;
     private boolean flag = true;
 
     public boolean getFlag(){return flag;}
 
-    public UI(Leyebrarian lib, Message mes) {
-        this.leyebrarian = lib;
+    public UI(Librarian lib, Message mes) {
+        this.librarian = lib;
         this.message = mes;
     }
 
     public void printMainMenu(){
         while (flag) {
             message.printMessage("Options");
-            leyebrarian.render(leyebrarian.menuList());
-            mainMenuHelper(leyebrarian.getUserOption());
+            librarian.render(librarian.menuList());
+            mainMenuHelper(librarian.getUserOption());
         }
     }
 
@@ -27,11 +27,11 @@ public class UI {
         if (userInput.equals("Q")) {
             flag = false;
         }else if (userInput.equals("L")) {
-            leyebrarian.render(leyebrarian.getAvailableBooks());
+            librarian.render(librarian.getAvailableBooks());
         }else if (userInput.equals("C")) {
-            leyebrarian.checkoutBook(leyebrarian.getUserOption());
+            librarian.checkoutBook(librarian.getUserOption());
         }else if (userInput.equals("R")) {
-            leyebrarian.returnBook(leyebrarian.getUserOption());
+            librarian.returnBook(librarian.getUserOption());
         }else {
             message.printMessage("InvalidOption");
         }
