@@ -12,8 +12,11 @@ public class Message {
         messages.put("Welcome", "Hello, welcome to Biblioteca!");
         messages.put("Options", "Please let us know your options: ");
         messages.put("InvalidOption", "Select a invalid option!");
+        messages.put("InvalidUserInfor", "Invalid library number or password: ");
         messages.put("EnterBookName", "Please enter the book's name: ");
         messages.put("EnterMovieName", "Please enter the movie's name: ");
+        messages.put("EnterLibraryNumber", "Please enter your user name: ");
+        messages.put("EnterUserPassword", "Please enter your password: ");
         messages.put("checkoutBookSuccessmessage", "Thank you! Enjoy the book");
         messages.put("checkoutBookUnsuccessmessage", "That book is not available.");
         messages.put("checkoutMovieSuccessmessage", "Thank you! Enjoy the movie");
