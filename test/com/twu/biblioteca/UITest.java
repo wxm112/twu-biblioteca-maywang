@@ -33,7 +33,7 @@ public class UITest {
 
     @Test
      public void checkoutAbookTest() throws Exception {
-        when(mockedLibrarian.getUserOption()).thenReturn("anyString");
+        when(mockedLibrarian.getUserInput()).thenReturn("anyString");
         app.mainMenuHelper("CB");
         verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedLibrarian, times(1)).checkoutBook("anyString");
@@ -41,7 +41,7 @@ public class UITest {
 
     @Test
     public void checkoutAmovieTest() throws Exception {
-        when(mockedLibrarian.getUserOption()).thenReturn("anyString");
+        when(mockedLibrarian.getUserInput()).thenReturn("anyString");
         app.mainMenuHelper("CM");
         verify(mockedMessage, times(1)).printMessage("EnterMovieName");
         verify(mockedLibrarian, times(1)).checkoutMovie("anyString");
@@ -49,7 +49,7 @@ public class UITest {
 
     @Test
      public void returnAbookTest() throws Exception {
-        when(mockedLibrarian.getUserOption()).thenReturn("anyString");
+        when(mockedLibrarian.getUserInput()).thenReturn("anyString");
         app.mainMenuHelper("RB");
         verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedLibrarian, times(1)).returnBook("anyString");
@@ -57,7 +57,7 @@ public class UITest {
 
     @Test
     public void returnAmovieTest() throws Exception {
-        when(mockedLibrarian.getUserOption()).thenReturn("anyString");
+        when(mockedLibrarian.getUserInput()).thenReturn("anyString");
         app.mainMenuHelper("RM");
         verify(mockedMessage, times(1)).printMessage("EnterMovieName");
         verify(mockedLibrarian, times(1)).returnMovie("anyString");
@@ -82,6 +82,6 @@ public class UITest {
 //        app.printMainMenu();
 //        verify(mockedMessage, times(1)).printMessage("Options");
 //        verify(mockedLibrarian, times(1)).render(menuList);
-//        verify(mockedIo, times(1)).getUserOption();
+//        verify(mockedIo, times(1)).getUserInput();
 //    }
 }

@@ -81,9 +81,9 @@ public class Librarian {
         }
     }
 
-    public String getUserOption() {
+    public String getUserInput() {
         Scanner input = new Scanner(System.in);
-        return input.nextLine().trim().toUpperCase();
+        return input.nextLine().trim();
     }
 
     public List<String> getAvailableItemsOfType(String itemType) {
