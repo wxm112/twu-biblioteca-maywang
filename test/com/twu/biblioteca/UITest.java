@@ -18,24 +18,49 @@ public class UITest {
 
 
     @Test
-    public void shouldCallRenderFunctionTest() throws Exception {
+     public void listAllAvailableBooksTest() throws Exception {
         List<String> bookList = mockedLibrarian.getAvailableItemsOfType("Book");
-        app.mainMenuHelper("L");
+        app.mainMenuHelper("LB");
         verify(mockedLibrarian, times(1)).render(bookList);
     }
 
     @Test
-    public void shouldCallCheckoutBookFunctionTest() throws Exception {
+    public void listAllAvailableMoviesTest() throws Exception {
+        List<String> movieList = mockedLibrarian.getAvailableItemsOfType("Movie");
+        app.mainMenuHelper("LM");
+        verify(mockedLibrarian, times(1)).render(movieList);
+    }
+
+    @Test
+     public void checkoutAbookTest() throws Exception {
         when(mockedLibrarian.getUserOption()).thenReturn("anyString");
-        app.mainMenuHelper("C");
+        app.mainMenuHelper("CB");
+        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedLibrarian, times(1)).checkoutBook("anyString");
     }
 
     @Test
-     public void shouldCallReturnBookBookFunctionTest() throws Exception {
+    public void checkoutAmovieTest() throws Exception {
         when(mockedLibrarian.getUserOption()).thenReturn("anyString");
-        app.mainMenuHelper("R");
+        app.mainMenuHelper("CM");
+        verify(mockedMessage, times(1)).printMessage("EnterMovieName");
+        verify(mockedLibrarian, times(1)).checkoutMovie("anyString");
+    }
+
+    @Test
+     public void returnAbookTest() throws Exception {
+        when(mockedLibrarian.getUserOption()).thenReturn("anyString");
+        app.mainMenuHelper("RB");
+        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedLibrarian, times(1)).returnBook("anyString");
+    }
+
+    @Test
+    public void returnAmovieTest() throws Exception {
+        when(mockedLibrarian.getUserOption()).thenReturn("anyString");
+        app.mainMenuHelper("RM");
+        verify(mockedMessage, times(1)).printMessage("EnterMovieName");
+        verify(mockedLibrarian, times(1)).returnMovie("anyString");
     }
 
     @Test

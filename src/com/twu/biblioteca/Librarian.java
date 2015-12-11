@@ -32,16 +32,16 @@ public class Librarian {
         return changeCheckoutStatus(moiveName, "Movie", true, "checkout");
     }
 
-    public JSONObject returnMovie(String bookName) {
-        return changeCheckoutStatus(bookName, "Movie", false, "return");
+    public JSONObject returnMovie(String moiveName) {
+        return changeCheckoutStatus(moiveName, "Movie", false, "return");
     }
 
     private JSONObject changeCheckoutStatus(String itemName, String listName, boolean newCheckoutStatus, String functionName) {
         JSONObject list = (JSONObject) data.get(listName);
         JSONObject selectedItem = (JSONObject) list.get(itemName);
-        message.printMessage("Enter" + listName + "Name");
         if (selectedItem != null) {
             Object checkoutStatus = selectedItem.get("Checkout");
+
             if (!checkoutStatus.equals(newCheckoutStatus)) {
                 selectedItem.remove("Checkout");
                 selectedItem.put("Checkout", newCheckoutStatus);
@@ -66,9 +66,12 @@ public class Librarian {
     public List<String> menuList() {
         List<String> menu = new ArrayList<String>();
         menu.add("Q: Quit");
-        menu.add("C: Checkout book");
-        menu.add("L: List Books");
-        menu.add("R: Return Books");
+        menu.add("LB: List Books");
+        menu.add("CB: Checkout Books");
+        menu.add("RB: Return Books");
+        menu.add("LM: List Movies");
+        menu.add("CM: Checkout Movies");
+        menu.add("RM: Return Movies");
         return menu;
     }
 

@@ -23,21 +23,29 @@ public class UI {
         }
     }
 
-    public boolean mainMenuHelper(String userInput) {
+    public boolean mainMenuHelper(String userInput){
         if (userInput.equals("Q")) {
             flag = false;
-        }else if (userInput.equals("L")) {
+        }else if (userInput.equals("LB")) {
             librarian.render(librarian.getAvailableBooks());
-        }else if (userInput.equals("C")) {
+        }else if (userInput.equals("CB")) {
+            message.printMessage("EnterBookName");
             librarian.checkoutBook(librarian.getUserOption());
-        }else if (userInput.equals("R")) {
+        }else if (userInput.equals("RB")) {
+            message.printMessage("EnterBookName");
             librarian.returnBook(librarian.getUserOption());
+        }else if (userInput.equals("LM")) {
+            librarian.render(librarian.getAvailableMovies());
+        }else if (userInput.equals("CM")) {
+            message.printMessage("EnterMovieName");
+            librarian.checkoutMovie(librarian.getUserOption());
+        }else if (userInput.equals("RM")) {
+            message.printMessage("EnterMovieName");
+            librarian.returnMovie(librarian.getUserOption());
         }else {
             message.printMessage("InvalidOption");
         }
         return true;
     }
-
-
 
 }

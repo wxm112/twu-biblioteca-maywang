@@ -73,7 +73,6 @@ public class LibrarianTest {
     @Test
     public void checkoutBookShouldUpdateDataFileTest() throws Exception {
         assertEquals(app.checkoutBook("SECRET GARDEN"), initializeBooksStatus(true, true));
-        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("checkoutBookSuccessmessage");
         assertEquals(new IO().fileReader("./testData.json"), initializeBooksStatus(true, true));
     }
@@ -81,21 +80,18 @@ public class LibrarianTest {
     @Test
     public void checkoutBookMissWithWrongBookNameTest() throws Exception {
         assertEquals(app.checkoutBook("THE DAY THE CRAYONS QUIT"), null);
-        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("checkoutBookUnsuccessmessage");
     }
 
     @Test
     public void checkoutBookMissWithGibberishTest() throws Exception {
         assertEquals(app.checkoutBook("tyjed"), null);
-        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("checkoutBookUnsuccessmessage");
     }
 
     @Test
     public void returnBookShouldUpdateDataFileTest() throws Exception {
         assertEquals(app.returnBook("THE DAY THE CRAYONS QUIT"), initializeBooksStatus(false, false));
-        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("returnBookSuccessmessage");
         assertEquals(new IO().fileReader("./testData.json"), initializeBooksStatus(false, false));
     }
@@ -103,21 +99,18 @@ public class LibrarianTest {
     @Test
     public void returnBookMissWithWrongBookTest() throws Exception {
         assertEquals(app.returnBook("SECRET GARDEN"), null);
-        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("returnBookUnsuccessmessage");
     }
 
     @Test
     public void returnBookMissWithGibberishTest() throws Exception {
         assertEquals(app.returnBook("tyjed"), null);
-        verify(mockedMessage, times(1)).printMessage("EnterBookName");
         verify(mockedMessage, times(1)).printMessage("returnBookUnsuccessmessage");
     }
 
     @Test
     public void checkoutMovieShouldUpdateDataFileTest() throws Exception {
         assertEquals(app.checkoutMovie("Movie1"), initializeMoviesStatus(true, true));
-        verify(mockedMessage, times(1)).printMessage("EnterMovieName");
         verify(mockedMessage, times(1)).printMessage("checkoutMovieSuccessmessage");
         assertEquals(new IO().fileReader("./testData.json"), initializeMoviesStatus(true, true));
     }
@@ -125,21 +118,18 @@ public class LibrarianTest {
     @Test
     public void checkoutMovieMissWithWrongMovieNameTest() throws Exception {
         assertEquals(app.checkoutMovie("Movie0"), null);
-        verify(mockedMessage, times(1)).printMessage("EnterMovieName");
         verify(mockedMessage, times(1)).printMessage("checkoutMovieUnsuccessmessage");
     }
 
     @Test
     public void checkoutMovieMissWithGibberishTest() throws Exception {
         assertEquals(app.checkoutMovie("Movie0"), null);
-        verify(mockedMessage, times(1)).printMessage("EnterMovieName");
         verify(mockedMessage, times(1)).printMessage("checkoutMovieUnsuccessmessage");
     }
 
     @Test
     public void returntMovieShouldUpdateDataFileTest() throws Exception {
         assertEquals(app.returnMovie("Movie2"), initializeMoviesStatus(false, false));
-        verify(mockedMessage, times(1)).printMessage("EnterMovieName");
         verify(mockedMessage, times(1)).printMessage("returnMovieSuccessmessage");
         assertEquals(new IO().fileReader("./testData.json"), initializeMoviesStatus(false, false));
 
@@ -148,14 +138,12 @@ public class LibrarianTest {
     @Test
     public void returnMovieMissWithWrongMovieTest() throws Exception {
         assertEquals(app.returnMovie("Movie0"), null);
-        verify(mockedMessage, times(1)).printMessage("EnterMovieName");
         verify(mockedMessage, times(1)).printMessage("returnMovieUnsuccessmessage");
     }
 
     @Test
     public void returnMovieMissWithGibberishTest() throws Exception {
         assertEquals(app.returnMovie("kwkw"), null);
-        verify(mockedMessage, times(1)).printMessage("EnterMovieName");
         verify(mockedMessage, times(1)).printMessage("returnMovieUnsuccessmessage");
     }
 
