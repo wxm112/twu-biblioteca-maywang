@@ -87,6 +87,7 @@ public class UsersTest {
         userInfor.add("Phone Number: 1234567");
         userInfor.add("Password: 1111");
         userInfor.add("Email Address: admin@gmail.com");
+        userInfor.add("\n");
 
         assertEquals(userInfor, app.getUserInforMation("111-1111"));
     }
