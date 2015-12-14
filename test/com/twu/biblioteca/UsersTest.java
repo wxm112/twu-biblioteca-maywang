@@ -16,20 +16,24 @@ public class UsersTest {
     @Test
     public void returnTrueWhenUserEnterACorrectPasswordTest() throws Exception {
         when(mockedLibrarian.getUserInput()).thenReturn("123-1234","1234");
-        assertEquals(app.usercredential(), true);
+        app.userCredential();
+        assertEquals(app.loged, true);
     }
 
     @Test
-    public void returnFalseWhenUserEnterdWrongPasswordTest() throws Exception {
-        when(mockedLibrarian.getUserInput()).thenReturn("123-1234","2334");
-        assertEquals(app.usercredential(), false);
+    public void askForLibraryNoAndPasswordAgainWhenUserEnterdWrongPasswordTest() throws Exception {
+        when(mockedLibrarian.getUserInput()).thenReturn("123-1234","2334","123-1234","1234");
+        app.userCredential();
         verify(mockedMessage,times(1)).printMessage("InvalidUserInfor");
+        assertEquals(app.loged, true);
     }
 
     @Test
-    public void returnFalseWhenUserEnterdWrongLibraryNoTest() throws Exception {
-        when(mockedLibrarian.getUserInput()).thenReturn("3-1234","1234");
-        assertEquals(app.usercredential(), false);
+    public void askForLibraryNoAndPasswordAgainWhenUserEnterdWrongLibraryNoTest() throws Exception {
+        when(mockedLibrarian.getUserInput()).thenReturn("3-1234", "1234", "123-1234", "1234");
+        app.userCredential();
         verify(mockedMessage,times(1)).printMessage("InvalidUserInfor");
+        assertEquals(app.loged, true);
+
     }
 }

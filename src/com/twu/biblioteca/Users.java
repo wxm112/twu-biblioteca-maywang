@@ -7,27 +7,31 @@ import org.json.simple.JSONObject;
  */
 public class Users {
     private Message message;
-    private JSONObject userSData;
+    private JSONObject usersData;
     private Librarian librarian;
+    public boolean loged = false;
 
+    public boolean loged(){return loged;}
 
     public Users(String file, Message mes, Librarian lib) {
-        this.userSData = new IO().fileReader(file);
+        this.usersData = new IO().fileReader(file);
         this.message = mes;
         this.librarian = lib;
     }
 
-    public boolean usercredential(){
-        message.printMessage("EnterLibraryNumber");
-        String libraryNo = librarian.getUserInput();
-        message.printMessage("EnterUserPassword");
-        String inputedpassword = librarian.getUserInput();
-        JSONObject userDetails = (JSONObject) userSData.get(libraryNo);
-        if (userDetails != null) {
-            String savedPassword = (String)userDetails.get("Password");
-            if(inputedpassword.equals(savedPassword)) return true;
+    public void userCredential(){
+        while (loged == false) {
+            message.printMessage("EnterLibraryNumber");
+            String libraryNo = librarian.getUserInput();
+            message.printMessage("EnterUserPassword");
+            String inputedpassword = librarian.getUserInput();
+            JSONObject userDetails = (JSONObject) usersData.get(libraryNo);
+            if (userDetails != null) {
+                String savedPassword = (String) userDetails.get("Password");
+                if (inputedpassword.equals(savedPassword)) {
+                    loged = true;
+                } else message.printMessage("InvalidUserInfor");
+            } else message.printMessage("InvalidUserInfor");
         }
-        message.printMessage("InvalidUserInfor");
-        return false;
     }
 }

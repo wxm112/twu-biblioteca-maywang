@@ -6,20 +6,25 @@ package com.twu.biblioteca;
 public class UI {
     private Librarian librarian;
     private Message message;
+    private Users users;
     private boolean flag = true;
 
     public boolean getFlag(){return flag;}
 
-    public UI(Librarian lib, Message mes) {
+    public UI(Librarian lib, Message mes, Users us) {
         this.librarian = lib;
         this.message = mes;
+        this.users = us;
     }
 
     public void printMainMenu(){
-        while (flag) {
-            message.printMessage("Options");
-            librarian.render(librarian.menuList());
-            mainMenuHelper(librarian.getUserInput());
+        users.userCredential();
+        if (users.loged == true) {
+            while (flag) {
+                message.printMessage("Options");
+                librarian.render(librarian.menuList());
+                mainMenuHelper(librarian.getUserInput());
+            }
         }
     }
 

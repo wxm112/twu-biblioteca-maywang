@@ -13,7 +13,8 @@ import static org.mockito.Mockito.*;
 public class UITest {
     Librarian mockedLibrarian = mock(Librarian.class);
     Message mockedMessage = mock(Message.class);
-    UI app = new UI(mockedLibrarian,mockedMessage);
+    Users mockedUsers = mock(Users.class);
+    UI app = new UI(mockedLibrarian,mockedMessage, mockedUsers);
 
 
 

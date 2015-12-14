@@ -5,9 +5,10 @@ public class BibliotecaApp {
     private Message message = new Message();
     private IO io = new IO();
     private Librarian librarian = new Librarian("./data.json", message,io);
+    private Users users = new Users("./users.json", message, librarian);
 
     public BibliotecaApp() {
-        this.ui = new UI(librarian,message);
+        this.ui = new UI(librarian,message, users);
     }
 
 
