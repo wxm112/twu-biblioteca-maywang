@@ -2,6 +2,10 @@ package com.twu.biblioteca;
 
 import org.json.simple.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * Created by mayw on 11/12/2015.
  */
@@ -30,10 +34,24 @@ public class Users {
                 String savedPassword = (String) userDetails.get("Password");
                 if (inputedpassword.equals(savedPassword)) {
                     librarian.setCurrentUser(libraryNo);
-                    if(userDetails.get("UserName").equals("Admin")) librarian.setAdmin(true);
+                    if(userDetails.get("User Name").equals("Admin")) librarian.setAdmin(true);
                     loged = true;
                 } else message.printMessage("InvalidUserInfor");
             } else message.printMessage("InvalidUserInfor");
         }
+    }
+
+    public List<String> getUserInforMation(String libraryNo){
+        List<String> userInfor= new ArrayList<String>();
+        for(Object obj : usersData.keySet()) {
+            if(obj.equals(libraryNo)) {
+                HashMap userDetail = (HashMap)usersData.get(obj);
+                for(Object user : userDetail.keySet()) {
+                    userInfor.add(user + ": " + userDetail.get(user));
+                }
+                userInfor.add("\n");
+            }
+        }
+        return userInfor;
     }
 }

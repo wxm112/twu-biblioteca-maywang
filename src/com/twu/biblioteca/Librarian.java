@@ -91,6 +91,7 @@ public class Librarian {
         if (admin){
             menu.add("CD: Checkout details");
         }else {
+            menu.add("I: User information");
             menu.add("LB: List Books");
             menu.add("CB: Checkout Books");
             menu.add("RB: Return Books");

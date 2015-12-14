@@ -2,6 +2,9 @@ package com.twu.biblioteca;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -75,4 +78,17 @@ public class UsersTest {
         assertEquals(app.getLoged(), true);
 
     }
+
+
+    @Test
+    public void getUsersDetailInformationTest() throws Exception {
+        List<String> userInfor = new ArrayList<>();
+        userInfor.add("User Name: Admin");
+        userInfor.add("Phone Number: 1234567");
+        userInfor.add("Password: 1111");
+        userInfor.add("Email Address: admin@gmail.com");
+
+        assertEquals(userInfor, app.getUserInforMation("111-1111"));
+    }
+
 }

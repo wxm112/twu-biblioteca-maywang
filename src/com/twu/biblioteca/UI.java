@@ -32,6 +32,8 @@ public class UI {
         userInput = userInput.toUpperCase();
         if (userInput.equals("Q")) {
             flag = false;
+        }else if (userInput.equals("I")) {
+            librarian.render(users.getUserInforMation(librarian.getCurrentUser()));
         }else if (userInput.equals("LB")) {
             librarian.render(librarian.getAvailableBooks());
         }else if (userInput.equals("CB")) {
