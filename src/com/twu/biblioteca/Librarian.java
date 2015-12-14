@@ -9,8 +9,14 @@ import java.util.Scanner;
 public class Librarian {
     private JSONObject data;
     private Message message;
+    private String currentUser = null;
     private IO io;
     private String file;
+
+
+    public String getCurrentUser(){return currentUser;}
+    public void setCurrentUser(String user){ this.currentUser = user;}
+
 
     public Librarian(String filename, Message message, IO io) {
         this.file = filename;
@@ -21,30 +27,31 @@ public class Librarian {
 
 
     public JSONObject checkoutBook(String bookName) {
-        return changeCheckoutStatus(bookName, "Book", true, "checkout");
+        return changeCheckoutStatus(bookName, "Book", true, "checkout",currentUser);
     }
 
     public JSONObject returnBook(String bookName) {
-        return changeCheckoutStatus(bookName, "Book", false, "return");
+        return changeCheckoutStatus(bookName, "Book", false, "return", null);
     }
 
     public JSONObject checkoutMovie(String moiveName) {
-        return changeCheckoutStatus(moiveName, "Movie", true, "checkout");
+        return changeCheckoutStatus(moiveName, "Movie", true, "checkout", currentUser);
     }
 
     public JSONObject returnMovie(String moiveName) {
-        return changeCheckoutStatus(moiveName, "Movie", false, "return");
+        return changeCheckoutStatus(moiveName, "Movie", false, "return", null);
     }
 
-    private JSONObject changeCheckoutStatus(String itemName, String listName, boolean newCheckoutStatus, String functionName) {
+    private JSONObject changeCheckoutStatus(String itemName, String listName, boolean newCheckoutStatus, String functionName, String borrower) {
         JSONObject list = (JSONObject) data.get(listName);
         JSONObject selectedItem = (JSONObject) list.get(itemName);
         if (selectedItem != null) {
             Object checkoutStatus = selectedItem.get("Checkout");
-
             if (!checkoutStatus.equals(newCheckoutStatus)) {
                 selectedItem.remove("Checkout");
                 selectedItem.put("Checkout", newCheckoutStatus);
+                selectedItem.remove("Borrower");
+                selectedItem.put("Borrower", borrower);
                 message.printMessage(functionName + listName + "Successmessage");
                 io.updateJasonFile(data, file);
                 return data;

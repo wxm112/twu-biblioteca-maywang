@@ -76,13 +76,4 @@ public class UITest {
         assertEquals(app.getFlag(), false);
     }
 
-//    @Test
-//     public void optionMessageGetCalledbyPrintMainMenuTest() throws Exception {
-//        ArrayList<String> menuList = new ArrayList<String>();
-//        when(mockedLibrarian.menuList()).thenReturn(menuList);
-//        app.printMainMenu();
-//        verify(mockedMessage, times(1)).printMessage("Options");
-//        verify(mockedLibrarian, times(1)).render(menuList);
-//        verify(mockedIo, times(1)).getUserInput();
-//    }
 }

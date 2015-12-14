@@ -17,31 +17,34 @@ public class LibrarianTest {
     IO io = new IO();
     Librarian app = new Librarian("./testData.json", mockedMessage, io);
 
-    private JSONObject initializeBooksStatus(boolean firstCheckoutStatus, boolean secondCheckoutStatus){
-        return initialize(firstCheckoutStatus,secondCheckoutStatus,false,true);
+    private JSONObject initializeBooks(boolean firstCheckoutStatus, boolean secondCheckoutStatus, String firstBorrower, String secondBorrower){
+        return initialize(firstCheckoutStatus,secondCheckoutStatus,false,true, firstBorrower, secondBorrower, null, "123-1234");
     }
 
-    private JSONObject initializeMoviesStatus(boolean firstCheckoutStatus, boolean secondCheckoutStatus){
-        return initialize(false,true,firstCheckoutStatus,secondCheckoutStatus);
+    private JSONObject initializeMovies(boolean firstCheckoutStatus, boolean secondCheckoutStatus,String firstBorrower, String secondBorrower){
+        return initialize(false,true,firstCheckoutStatus,secondCheckoutStatus, null, "123-1234",firstBorrower, secondBorrower );
     }
 
-    private JSONObject initialize(boolean checkoutStatus1, boolean checkoutStatus2, boolean checkoutStatus3, boolean checkoutStatus4) {
+    private JSONObject initialize(boolean checkoutStatus1, boolean checkoutStatus2, boolean checkoutStatus3, boolean checkoutStatus4, String borrower1,String borrower2,String borrower3,String borrower4) {
         JSONObject obj = new JSONObject();
 
         //Created booksObject with three book objects;
         JSONObject booksObj = new JSONObject();
         JSONObject bookDetail1 = new JSONObject();
         bookDetail1.put("Checkout", checkoutStatus1);
+        bookDetail1.put("Borrower", borrower1);
         bookDetail1.put("Author", "Johanna Basford");
         bookDetail1.put("PublicationYear", "2015");
         booksObj.put("SECRET GARDEN", bookDetail1);
         JSONObject bookDetail2 = new JSONObject();
         bookDetail2.put("Checkout", false);
+        bookDetail2.put("Borrower", null);
         bookDetail2.put("Author", "Warner Brothers");
         bookDetail2.put("PublicationYear", "2015");
         booksObj.put("HARRY POTTER COLOURING BOOK", bookDetail2);
         JSONObject bookDetail3 = new JSONObject();
         bookDetail3.put("Checkout", checkoutStatus2);
+        bookDetail3.put("Borrower", borrower2);
         bookDetail3.put("Author", "Drew Daywal");
         bookDetail3.put("PublicationYear", "2015");
         booksObj.put("THE DAY THE CRAYONS QUIT", bookDetail3);
@@ -50,12 +53,14 @@ public class LibrarianTest {
         JSONObject movieObj = new JSONObject();
         JSONObject movieDetail1 = new JSONObject();
         movieDetail1.put("Checkout",checkoutStatus3);
+        movieDetail1.put("Borrower", borrower3);
         movieDetail1.put("Year", "2011");
         movieDetail1.put("Director", "Director1");
         movieDetail1.put("Rate", "1");
         movieObj.put("Movie1", movieDetail1);
         JSONObject movieDetail2 = new JSONObject();
         movieDetail2.put("Checkout",checkoutStatus4);
+        movieDetail2.put("Borrower", borrower4);
         movieDetail2.put("Year", "2012");
         movieDetail2.put("Director", "Director2");
         movieDetail2.put("Rate", "2");
@@ -72,14 +77,15 @@ public class LibrarianTest {
 
     @Test
     public void checkoutBookShouldUpdateDataFileTest() throws Exception {
-        assertEquals(app.checkoutBook("SECRET GARDEN"), initializeBooksStatus(true, true));
+        app.setCurrentUser("123-1234");
+        app.checkoutBook("SECRET GARDEN");
         verify(mockedMessage, times(1)).printMessage("checkoutBookSuccessmessage");
-        assertEquals(new IO().fileReader("./testData.json"), initializeBooksStatus(true, true));
+        assertEquals(initializeBooks(true, true, "123-1234", "123-1234"),new IO().fileReader("./testData.json"));
     }
 
     @Test
-    public void checkoutBookMissWithWrongBookNameTest() throws Exception {
-        assertEquals(app.checkoutBook("THE DAY THE CRAYONS QUIT"), null);
+     public void checkoutBookMissWithWrongBookNameTest() throws Exception {
+        app.checkoutBook("THE DAY THE CRAYONS QUIT");
         verify(mockedMessage, times(1)).printMessage("checkoutBookUnsuccessmessage");
     }
 
@@ -91,9 +97,9 @@ public class LibrarianTest {
 
     @Test
     public void returnBookShouldUpdateDataFileTest() throws Exception {
-        assertEquals(app.returnBook("THE DAY THE CRAYONS QUIT"), initializeBooksStatus(false, false));
+        app.returnBook("THE DAY THE CRAYONS QUIT");
         verify(mockedMessage, times(1)).printMessage("returnBookSuccessmessage");
-        assertEquals(new IO().fileReader("./testData.json"), initializeBooksStatus(false, false));
+        assertEquals(initializeBooks(false, false, null,null),new IO().fileReader("./testData.json"));
     }
 
     @Test
@@ -110,9 +116,10 @@ public class LibrarianTest {
 
     @Test
     public void checkoutMovieShouldUpdateDataFileTest() throws Exception {
-        assertEquals(app.checkoutMovie("Movie1"), initializeMoviesStatus(true, true));
+        app.setCurrentUser("123-1234");
+        app.checkoutMovie("Movie1");
         verify(mockedMessage, times(1)).printMessage("checkoutMovieSuccessmessage");
-        assertEquals(new IO().fileReader("./testData.json"), initializeMoviesStatus(true, true));
+        assertEquals(new IO().fileReader("./testData.json"), initializeMovies(true, true,"123-1234","123-1234"));
     }
 
     @Test
@@ -129,9 +136,9 @@ public class LibrarianTest {
 
     @Test
     public void returntMovieShouldUpdateDataFileTest() throws Exception {
-        assertEquals(app.returnMovie("Movie2"), initializeMoviesStatus(false, false));
+        app.returnMovie("Movie2");
         verify(mockedMessage, times(1)).printMessage("returnMovieSuccessmessage");
-        assertEquals(new IO().fileReader("./testData.json"), initializeMoviesStatus(false, false));
+        assertEquals(new IO().fileReader("./testData.json"), initializeMovies(false, false, null, null));
 
     }
 
@@ -173,6 +180,6 @@ public class LibrarianTest {
 
     @After
     public void recoverData() {
-        io.updateJasonFile(initialize(false,true, false,true), "./testData.json");
+        io.updateJasonFile(initialize(false,true, false,true, null, "123-1234", null, "123-1234"), "./testData.json");
     }
 }

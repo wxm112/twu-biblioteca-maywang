@@ -9,9 +9,9 @@ public class Users {
     private Message message;
     private JSONObject usersData;
     private Librarian librarian;
-    public boolean loged = false;
+    private boolean loged = false;
 
-    public boolean loged(){return loged;}
+    public boolean getLoged(){return loged;}
 
     public Users(String file, Message mes, Librarian lib) {
         this.usersData = new IO().fileReader(file);
@@ -29,6 +29,7 @@ public class Users {
             if (userDetails != null) {
                 String savedPassword = (String) userDetails.get("Password");
                 if (inputedpassword.equals(savedPassword)) {
+                    librarian.setCurrentUser(libraryNo);
                     loged = true;
                 } else message.printMessage("InvalidUserInfor");
             } else message.printMessage("InvalidUserInfor");

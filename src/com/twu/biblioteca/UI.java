@@ -19,7 +19,7 @@ public class UI {
 
     public void printMainMenu(){
         users.userCredential();
-        if (users.loged == true) {
+        if (users.getLoged() == true) {
             while (flag) {
                 message.printMessage("Options");
                 librarian.render(librarian.menuList());
