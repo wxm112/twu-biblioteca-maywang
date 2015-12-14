@@ -15,7 +15,7 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         BibliotecaApp app = new BibliotecaApp();
         app.message.printMessage("Welcome");
-        app.ui.printMainMenu();
+        app.ui.printUsersMainMenu();
     }
 
 

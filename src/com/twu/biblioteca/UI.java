@@ -17,7 +17,7 @@ public class UI {
         this.users = us;
     }
 
-    public void printMainMenu(){
+    public void printUsersMainMenu(){
         users.userCredential();
         if (users.getLoged() == true) {
             while (flag) {
