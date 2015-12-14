@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.*;
@@ -96,8 +97,18 @@ public class LibrarianTest extends ProjectGenerator {
     }
 
     @Test
+    public void getCheckoutItemDetailsTest() throws Exception {
+        List<String> list = new ArrayList<String>();
+        list.add("Item Title: THE DAY THE CRAYONS QUIT");
+        list.add("Borrower's library NO.: 123-1234" + "\n");
+        list.add("Item Title: Movie2");
+        list.add("Borrower's library NO.: 123-1234" + "\n");
+        assertEquals(app.getCheckoutItemDetails(), list);
+    }
+
+    @Test
     public void testThatTheExpectedBooksAreThere() throws Exception {
-        ArrayList<String> availabeBookList = new ArrayList<String>();
+        List<String> availabeBookList = new ArrayList<String>();
         availabeBookList.add("Book Title: SECRET GARDEN");
         availabeBookList.add("Author: Johanna Basford");
         availabeBookList.add("Publication Year: 2015" + "\n");
@@ -110,7 +121,7 @@ public class LibrarianTest extends ProjectGenerator {
 
     @Test
     public void testThatTheExpectedMoviesAreThere() throws Exception {
-        ArrayList<String> availabeMoviesList = new ArrayList<String>();
+        List<String> availabeMoviesList = new ArrayList<String>();
         availabeMoviesList.add("Movie Title: Movie1");
         availabeMoviesList.add("Year: 2011");
         availabeMoviesList.add("Rate: 1");

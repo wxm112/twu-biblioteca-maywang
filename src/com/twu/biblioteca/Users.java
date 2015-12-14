@@ -30,6 +30,7 @@ public class Users {
                 String savedPassword = (String) userDetails.get("Password");
                 if (inputedpassword.equals(savedPassword)) {
                     librarian.setCurrentUser(libraryNo);
+                    if(userDetails.get("UserName").equals("Admin")) librarian.setAdmin(true);
                     loged = true;
                 } else message.printMessage("InvalidUserInfor");
             } else message.printMessage("InvalidUserInfor");

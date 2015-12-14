@@ -20,14 +20,14 @@ public class UITest {
 
     @Test
      public void listAllAvailableBooksTest() throws Exception {
-        List<String> bookList = mockedLibrarian.getAvailableItemsOfType("Book");
+        List<String> bookList = mockedLibrarian.getAvailableItemsOfType("Book","user");
         app.mainMenuHelper("LB");
         verify(mockedLibrarian, times(1)).render(bookList);
     }
 
     @Test
     public void listAllAvailableMoviesTest() throws Exception {
-        List<String> movieList = mockedLibrarian.getAvailableItemsOfType("Movie");
+        List<String> movieList = mockedLibrarian.getAvailableItemsOfType("Movie","user");
         app.mainMenuHelper("LM");
         verify(mockedLibrarian, times(1)).render(movieList);
     }

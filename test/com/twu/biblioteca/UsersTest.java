@@ -21,6 +21,27 @@ public class UsersTest {
     }
 
     @Test
+    public void setCurrentUserWhenUserEnterACorrectPasswordTest() throws Exception {
+        when(mockedLibrarian.getUserInput()).thenReturn("123-1234","1234");
+        app.userCredential();
+        verify(mockedLibrarian,times(1)).setCurrentUser("123-1234");
+    }
+
+    @Test
+    public void setAdmintoTrueWhenUserIsAdminTest() throws Exception {
+        when(mockedLibrarian.getUserInput()).thenReturn("111-1111","1111");
+        app.userCredential();
+        verify(mockedLibrarian,times(1)).setAdmin(true);
+    }
+
+    @Test
+    public void doNotsetAdmintoTrueWhenUserisNotAdminTest() throws Exception {
+        when(mockedLibrarian.getUserInput()).thenReturn("123-1234","1234");
+        app.userCredential();
+        verify(mockedLibrarian,times(0)).setAdmin(true);
+    }
+
+    @Test
     public void askForLibraryNoAndPasswordAgainWhenUserEnteredWrongPasswordTest() throws Exception {
         when(mockedLibrarian.getUserInput()).thenReturn("123-1234","2334","123-1234","1234");
         app.userCredential();
@@ -28,6 +49,20 @@ public class UsersTest {
         verify(mockedMessage,times(2)).printMessage("EnterUserPassword");
         verify(mockedMessage,times(1)).printMessage("InvalidUserInfor");
         assertEquals(app.getLoged(), true);
+    }
+
+    @Test
+    public void doNotsetCurrentUserWhenUserEnterIncorrectPasswordTest() throws Exception {
+        when(mockedLibrarian.getUserInput()).thenReturn("123-1234","1334","123-1234","1234");
+        app.userCredential();
+        verify(mockedLibrarian,times(1)).setCurrentUser("123-1234");
+    }
+
+    @Test
+    public void doNotsetCurrentUserWhenUserEnterIncorrectLibraryNoTest() throws Exception {
+        when(mockedLibrarian.getUserInput()).thenReturn("123-3","1234","123-1234","1234");
+        app.userCredential();
+        verify(mockedLibrarian,times(1)).setCurrentUser("123-1234");
     }
 
     @Test

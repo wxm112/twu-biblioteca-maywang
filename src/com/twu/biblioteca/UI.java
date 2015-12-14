@@ -48,6 +48,8 @@ public class UI {
         }else if (userInput.equals("RM")) {
             message.printMessage("EnterMovieName");
             librarian.returnMovie(librarian.getUserInput());
+        }else if (userInput.equals("CD")) {
+            librarian.render(librarian.getCheckoutItemDetails());
         }else {
             message.printMessage("InvalidOption");
         }
